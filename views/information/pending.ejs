@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-6 max-w-5xl">
+    <h1 class="text-3xl font-bold mb-6">Pending College Information</h1>
+    <% if (informations && informations.length > 0) { %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% informations.forEach(info => { %>
+          <div class="bg-white p-4 rounded shadow-md">
+            <h2 class="text-xl font-semibold mb-2"><%= info.clg_name %></h2>
+            <a href="/api/information/approve/<%= info.info_id %>" class="text-indigo-600 hover:underline">Review & Approve</a>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p class="text-gray-700">No pending information to approve.</p>
+    <% } %>
+    <a href="/api/dashboard/<%= user.userType === 'admin' ? 'admin' : 'agent' %>" class="mt-4 inline-block text-indigo-600 hover:underline">Back to Dashboard</a>
+  </div>
+</body>
+</html>

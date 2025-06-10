@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto p-6 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-6 text-center">Update College Information</h1>
+    <% if (error) { %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+        <%= error %>
+      </div>
+    <% } %>
+    <form action="/api/information/update/<%= information.info_id %>" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow-md">
+      <input type="hidden" name="_method" value="PUT">
+      <!-- College Name -->
+      <div class="mb-4">
+        <label for="clg_name" class="block text-sm font-medium text-gray-700">College Name <span class="text-red-500">*</span></label>
+        <input type="text" id="clg_name" name="clg_name" value="<%= information.clg_name %>" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Heading -->
+      <div class="mb-4">
+        <label for="clg_heading" class="block text-sm font-medium text-gray-700">Heading</label>
+        <input type="text" id="clg_heading" name="clg_heading" value="<%= information.clg_heading || '' %>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Additional Info -->
+      <div class="mb-4">
+        <label for="clg_info1" class="block text-sm font-medium text-gray-700">Additional Info 1</label>
+        <textarea id="clg_info1" name="clg_info1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= information.clg_info1 || '' %></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="clg_info2" class="block text-sm font-medium text-gray-700">Additional Info 2</label>
+        <textarea id="clg_info2" name="clg_info2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= information.clg_info2 || '' %></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="clg_info3" class="block text-sm font-medium text-gray-700">Additional Info 3</label>
+        <textarea id="clg_info3" name="clg_info3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= information.clg_info3 || '' %></textarea>
+      </div>
+      <!-- Current College Images -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Current College Images</label>
+        <% if (information.clg_images_paths && information.clg_images_paths.length > 0) { %>
+          <div class="grid grid-cols-2 gap-4 mt-2">
+            <% information.clg_images_paths.forEach(path => { %>
+              <img src="<%= path %>" alt="College Image" class="w-full h-32 object-cover rounded" loading="lazy">
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p class="text-gray-500">No images uploaded</p>
+        <% } %>
+      </div>
+      <!-- Add New College Images -->
+      <div class="mb-4">
+        <label for="clg_images" class="block text-sm font-medium text-gray-700">Add New College Images (JPEG/PNG, max 10, 10MB each)</label>
+        <input type="file" id="clg_images" name="clg_images" multiple accept="image/jpeg,image/png" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+      </div>
+      <!-- Courses -->
+      <div class="mb-4">
+        <label for="clg_courses" class="block text-sm font-medium text-gray-700">Courses (JSON format)</label>
+        <textarea id="clg_courses" name="clg_courses" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= JSON.stringify(information.clg_courses || []) %></textarea>
+      </div>
+      <!-- Departments -->
+      <div class="mb-4">
+        <label for="clg_departments" class="block text-sm font-medium text-gray-700">Departments (JSON format)</label>
+        <textarea id="clg_departments" name="clg_departments" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= JSON.stringify(information.clg_departments || []) %></textarea>
+      </div>
+      <!-- Rating -->
+      <div class="mb-4">
+        <label for="clg_rating" class="block text-sm font-medium text-gray-700">Rating (0-5)</label>
+        <input type="number" id="clg_rating" name="clg_rating" value="<%= information.clg_rating || 0 %>" min="0" max="5" step="0.1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Accommodations -->
+      <div class="mb-4">
+        <label for="clg_acmts" class="block text-sm font-medium text-gray-700">Accommodations (JSON format)</label>
+        <textarea id="clg_acmts" name="clg_acmts" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= JSON.stringify(information.clg_acmts || []) %></textarea>
+      </div>
+      <!-- Current Accommodation Images -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700">Current Accommodation Images</label>
+        <% if (information.clg_acmts_img_paths && information.clg_acmts_img_paths.length > 0) { %>
+          <div class="grid grid-cols-2 gap-4 mt-2">
+            <% information.clg_acmts_img_paths.forEach(path => { %>
+              <img src="<%= path %>" alt="Accommodation Image" class="w-full h-32 object-cover rounded" loading="lazy">
+            <% }) %>
+          </div>
+        <% } else { %>
+          <p class="text-gray-500">No images uploaded</p>
+        <% } %>
+      </div>
+      <!-- Add New Accommodation Images -->
+      <div class="mb-4">
+        <label for="clg_acmts_images" class="block text-sm font-medium text-gray-700">Add New Accommodation Images (JPEG/PNG, max 10, 10MB each)</label>
+        <input type="file" id="clg_acmts_images" name="clg_acmts_images" multiple accept="image/jpeg,image/png" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+      </div>
+      <!-- Contact -->
+      <div class="mb-4">
+        <label for="clg_contact" class="block text-sm font-medium text-gray-700">Contact</label>
+        <input type="text" id="clg_contact" name="clg_contact" value="<%= information.clg_contact || '' %>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Email -->
+      <div class="mb-4">
+        <label for="clg_email" class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="clg_email" name="clg_email" value="<%= information.clg_email || '' %>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Address -->
+      <div class="mb-4">
+        <label for="clg_address" class="block text-sm font-medium text-gray-700">Address (JSON format)</label>
+        <textarea id="clg_address" name="clg_address" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"><%= JSON.stringify(information.clg_address || {}) %></textarea>
+      </div>
+      <!-- Address URL -->
+      <div class="mb-4">
+        <label for="clg_address_url" class="block text-sm font-medium text-gray-700">Address URL</label>
+        <input type="url" id="clg_address_url" name="clg_address_url" value="<%= information.clg_address_url || '' %>" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Year Established -->
+      <div class="mb-4">
+        <label for="clg_since" class="block text-sm font-medium text-gray-700">Year Established</label>
+        <input type="number" id="clg_since" name="clg_since" value="<%= information.clg_since || '' %>" min="1800" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+      <!-- Submit -->
+      <div class="flex justify-end">
+        <button type="submit" class="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">Update</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Client-side validation
+    document.querySelector('form').addEventListener('submit', (e) => {
+      const clgName = document.getElementById('clg_name').value;
+      const clgEmail = document.getElementById('clg_email').value;
+      const clgRating = document.getElementById('clg_rating').value;
+      const clgSince = document.getElementById('clg_since').value;
+
+      if (!clgName) {
+        e.preventDefault();
+        alert('College name is required');
+      }
+      if (clgEmail && !/^\S+@\S+\.\S+$/.test(clgEmail)) {
+        e.preventDefault();
+        alert('Invalid email format');
+      }
+      if (clgRating && (clgRating < 0 || clgRating > 5)) {
+        e.preventDefault();
+        alert('Rating must be between 0 and 5');
+      }
+      if (clgSince && clgSince < 1800) {
+        e.preventDefault();
+        alert('Year established cannot be before 1800');
+      }
+    });
+  </script>
+</body>
+</html>

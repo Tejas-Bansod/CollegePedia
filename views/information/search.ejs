@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title || 'Search Colleges' %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body class="bg-gray-100 overflow-x-hidden">
+  <main class="container mx-auto p-6 max-w-3xl">
+    <h1 class="text-3xl font-bold text-center mb-6">Search Colleges</h1>
+
+    <div class="relative">
+      <div class="flex items-center">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search by college name, ID, or info..."
+          class="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          autocomplete="off"
+        />
+        <svg id="loading-spinner" class="hidden w-6 h-6 ml-3 text-indigo-600 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+      </div>
+
+      <div id="search-suggestions"
+        class="absolute z-10 w-full bg-white border border-gray-200 rounded-md shadow-lg mt-1 max-h-96 overflow-y-auto hidden"
+        role="listbox" aria-label="Search suggestions">
+      </div>
+    </div>
+
+    <div id="search-error"
+      class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4 text-sm">
+    </div>
+  </main>
+
+  <script src="/js/search.js"></script>
+</body>
+</html>

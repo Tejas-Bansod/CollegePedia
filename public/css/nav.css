@@ -1,0 +1,64 @@
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: rgba(124, 58, 237, 0.2); /* Matches primary purple with transparency */
+    }
+
+    #search-suggestions div:hover {
+      background-color: #A78BFA !important; /* Override search.js hover:bg-gray-100 with theme accent */
+      color: #FFFFFF !important; /* White text on hover */
+    }
+
+    #search-suggestions img {
+      border: 2px solid #7C3AED; /* Purple border for images */
+    }
+
+    #search-suggestions span {
+      font-weight: 500; /* Slightly bolder text for a professional look */
+      font-size: 0.95rem; /* Slightly smaller text for compactness */
+    }
+
+    .highlight {
+      background-color: #A78BFA; /* Light purple background for highlighted text */
+      color: #FFFFFF; /* White text for contrast */
+      padding: 0.1rem 0.2rem; /* Small padding to avoid looking cramped */
+      border-radius: 3px; /* Subtle rounding */
+    }
+
+    #search-suggestions div:hover .highlight {
+      background-color: #FFFFFF; /* White background on hover to contrast with purple card */
+      color: #7C3AED; /* Purple text on hover for readability */
+    }
+
+    .search-container {
+      backdrop-filter: blur(8px); /* Apply blur effect */
+      -webkit-backdrop-filter: blur(8px); /* Vendor prefix for broader compatibility */
+      background-color: rgba(255, 255, 255, 0.85); /* Slightly translucent white for frosted glass effect */
+    }
+
+    /* Fallback for browsers that don't support backdrop-filter */
+    @supports not (backdrop-filter: blur(8px)) {
+      .search-container {
+        background-color: #FFFFFF; /* Solid white fallback */
+      }
+    }
+
+    nav {
+      backdrop-filter: blur(8px); /* Match the blur effect of the search bar */
+      -webkit-backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.95); /* Slightly more opaque than search bar for better text readability */
+    }
+
+    @supports not (backdrop-filter: blur(8px)) {
+      nav {
+        background-color: #FFFFFF; /* Solid white fallback */
+      }
+    }

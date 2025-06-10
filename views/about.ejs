@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | CollegePedia</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F3E8FF; /* Light purple background */
+      color: #2D1B4E; /* Dark purple text */
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .navbar {
+      background-color: #6B46C1; /* Primary purple for navbar */
+      box-shadow: 0 4px 6px -1px rgba(107, 70, 193, 0.1);
+    }
+    .navbar-brand, .nav-link {
+      color: #FFFFFF !important; /* White text for navbar */
+    }
+    .nav-link:hover {
+      color: #D6BCFA !important; /* Light purple on hover */
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1.5rem;
+    }
+    .section-header {
+      color: #6B46C1; /* Purple for headings */
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .content-card {
+      background-color: #FFFFFF; /* White for cards */
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(107, 70, 193, 0.1); /* Purple-tinted shadow */
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    p, li {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #2D1B4E;
+      margin-bottom: 0.75rem;
+    }
+    .contact-link {
+      color: #6B46C1; /* Purple for links */
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .contact-link:hover {
+      color: #9F7AEA; /* Light purple on hover */
+      text-decoration: underline;
+    }
+    .footer {
+      background-color: #6B46C1; /* Purple footer */
+      color: #FFFFFF;
+      padding: 2rem 0;
+      margin-top: auto;
+    }
+    .footer a {
+      color: #D6BCFA; /* Light purple for footer links */
+      text-decoration: none;
+    }
+    .footer a:hover {
+      color: #FFFFFF; /* White on hover */
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      .section-header {
+        font-size: 1.5rem;
+      }
+      .content-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-30 shadow-md backdrop-blur bg-white/90">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-primary flex items-center">
+          <i class="fas fa-graduation-cap mr-2"></i>CollegePedia
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="/" class="text-text hover:text-primary transition font-medium">Home</a>
+         <a href="/api/about" class="block text-text hover:text-primary font-medium">About</a>
+        <a href="/contact" class="text-text hover:text-primary transition font-medium">Contact</a>
+        <a href="/api/login" class="text-text hover:text-primary transition font-medium">Login/Register</a>
+      </div>
+
+      <!-- Mobile Toggle Button -->
+      <div class="md:hidden flex items-center">
+        <button id="menu-btn" class="text-primary focus:outline-none text-xl">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white rounded-lg shadow-md py-2 px-4 space-y-2">
+      <a href="/" class="block text-text hover:text-primary font-medium">Home</a>
+      <a href="/colleges" class="block text-text hover:text-primary font-medium">Colleges</a>
+      <a href="/courses" class="block text-text hover:text-primary font-medium">Courses</a>
+      <a href="/api/about" class="block text-text hover:text-primary font-medium">About</a>
+      <a href="/contact" class="block text-text hover:text-primary font-medium">Contact</a>
+    </div>
+  </div>
+</nav>
+
+  <!-- Main Content -->
+  <div class="container mt-24 mb-10">
+    <div class="content-card">
+      <h1 class="section-header"><i class="fas fa-info-circle"></i> About CollegePedia</h1>
+      <p>
+        CollegePedia is a comprehensive online platform dedicated to empowering students, educators, and institutions by providing detailed, reliable, and up-to-date information about colleges and universities worldwide. Founded in 2023, our mission is to simplify the college selection process by offering a one-stop resource for exploring academic programs, campus facilities, and institutional details.
+      </p>
+      <p>
+        Whether you're a prospective student seeking the perfect college, an institution looking to showcase your offerings, or an educator aiming to connect with academic opportunities, CollegePedia is designed to bridge the gap between aspiration and achievement. Our user-friendly interface and robust database make it easy to navigate the complex world of higher education.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h2 class="section-header"><i class="fas fa-bullseye"></i> Our Mission</h2>
+      <p>
+        At CollegePedia, our mission is to democratize access to higher education information. We strive to provide accurate, transparent, and comprehensive data about colleges, courses, and career paths to help students make informed decisions about their future. We aim to empower every individual with the knowledge they need to pursue their academic and professional goals.
+      </p>
+      <ul class="list-disc pl-5">
+        <li>Enable students to find institutions that align with their academic and personal aspirations.</li>
+        <li>Support colleges in showcasing their unique strengths and programs.</li>
+        <li>Foster a global community of learners and educators through accessible information.</li>
+      </ul>
+    </div>
+
+    <div class="content-card">
+      <h2 class="section-header"><i class="fas fa-eye"></i> Our Vision</h2>
+      <p>
+        We envision a world where every student has the tools and information to choose the right educational path without barriers. CollegePedia aims to be the leading global platform for higher education exploration, connecting students, institutions, and educators in a seamless ecosystem. By leveraging technology and community-driven insights, we aspire to transform the way people discover and engage with academic opportunities.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h2 class="section-header"><i class="fas fa-users"></i> Our Team</h2>
+      <p>
+        CollegePedia is powered by a passionate team of educators, technologists, and higher education enthusiasts committed to making a difference. Our diverse team brings together expertise in academic research, software development, and user experience design to create a platform that meets the needs of our global audience.
+      </p>
+      <p>
+        We collaborate with colleges, universities, and educational organizations to ensure our data is accurate and comprehensive. Our dedicated staff works tirelessly to update our database, respond to user inquiries, and enhance the platform's features.
+      </p>
+    </div>
+
+    <div class="content-card">
+      <h2 class="section-header"><i class="fas fa-phone-alt"></i> Contact Us</h2>
+      <p>
+        Have questions or feedback? We're here to help! Reach out to us via email or phone, or connect with us on social media for the latest updates and educational resources.
+      </p>
+      <ul class="list-none">
+        <li><i class="fas fa-envelope mr-2"></i> <a href="mailto:support@collegepedia.com" class="contact-link">support@collegepedia.com</a></li>
+        <li><i class="fas fa-phone mr-2"></i> <a href="tel:+1234567890" class="contact-link">+1 (234) 567-890</a></li>
+        <li><i class="fab fa-twitter mr-2"></i> <a href="https://twitter.com/collegepedia" class="contact-link">@CollegePedia</a></li>
+        <li><i class="fab fa-linkedin mr-2"></i> <a href="https://linkedin.com/company/collegepedia" class="contact-link">CollegePedia</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer -->
+   <footer class="bg-white py-12 mt-16 border-t border-gray-200">
+      <div class="max-w-5xl mx-auto text-center space-y-8 px-4">
+        <!-- Icon Row -->
+        <div class="flex justify-center gap-8 text-primary text-2xl">
+          <a href="#" class="hover:text-accent transition duration-300"><i class="fas fa-university"></i></a>
+          <a href="#" class="hover:text-accent transition duration-300"><i class="fas fa-book-open"></i></a>
+          <a href="#" class="hover:text-accent transition duration-300"><i class="fas fa-chalkboard-teacher"></i></a>
+          <a href="#" class="hover:text-accent transition duration-300"><i class="fas fa-briefcase"></i></a>
+          <a href="#" class="hover:text-accent transition duration-300"><i class="fas fa-globe"></i></a>
+        </div>
+
+        <!-- Text -->
+        <p class="text-sm text-text opacity-70">
+          © 2025 <strong>CollegePedia Foundation</strong>. Built with ❤️ by students for students.
+        </p>
+      </div>
+    </footer>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

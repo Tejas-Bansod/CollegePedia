@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title %> | Collegepedia</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/nav.css">
+  <!-- Custom CSS -->
+   <style>
+    
+   </style>
+  <style>
+    body {
+      background: #ffffff;
+      color: #2d1b4e;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container-fluid {
+      max-width: 960px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+    }
+
+    /* Layout: Left 65%, Right 35% */
+    .left-col {
+      flex: 0 0 65%;
+      max-width: 65%;
+      padding-right: 1.5rem;
+      border-right: 1px solid #e5e7eb;
+    }
+
+    .right-col {
+      flex: 0 0 35%;
+      max-width: 35%;
+      padding-left: 1.5rem;
+    }
+
+    .row.flex-container {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0;
+    }
+
+    /* Typography & spacing */
+    .prose {
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .prose h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: #4c1d95;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .prose h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #4c1d95;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 0.3rem;
+    }
+
+    /* HR style */
+    hr.section-divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 1rem 0;
+    }
+
+    /* Paragraph & list spacing */
+    .prose p,
+    .prose li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Badges style */
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      background-color: #4c1d95;
+      color: #ffffff;
+      margin: 0.15rem 0.15rem 0.15rem 0;
+      display: inline-block;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .badge:hover {
+      background-color: #6d28d9;
+    }
+
+    /* Images */
+    .gal-img img {
+      max-height: 120px;
+      object-fit: cover;
+      border-radius: 0.3rem;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Contact and address styling */
+    section.contact-info p,
+    section.address p {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+    }
+    section.contact-info a,
+    section.address a {
+      color: #4c1d95;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    section.contact-info a:hover,
+    section.address a:hover {
+      text-decoration: underline;
+    }
+
+    /* Slider styles */
+    .custom-swiper {
+      position: relative;
+      max-width: 100%;
+      user-select: none;
+    }
+
+    .slides-container {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 2 / 1; /* Makes the container square */
+      width: 100%;
+    }
+    .slides-container img {
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .slides-container img:not(.slide) {
+      width: 100%;
+      height: 100%;
+      
+      object-fit: cover;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures image covers the container */
+      object-position: center; /* Centers the image */
+      border-radius: 0.5rem;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: #4c1d95;
+      color: #ffffff;
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    .nav-btn i {
+      font-size: 20px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 5px 0;
+    }
+
+    .pagination .dot {
+      width: 10px;
+      height: 10px;
+      background: #d8b4fe;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .pagination .dot.active {
+      background: #4c1d95;
+    }
+  </style>
+</head>
+<body>
+  <nav class="fixed top-0 left-0 w-full z-30 shadow-md backdrop-blur bg-white/90">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="text-2xl font-bold text-primary flex items-center">
+          <i class="fas fa-graduation-cap mr-2"></i>CollegePedia
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex space-x-8">
+        <a href="/" class="text-text hover:text-primary transition font-medium">Home</a>
+        <a href="/colleges" class="text-text hover:text-primary transition font-medium">Colleges</a>
+        <a href="/courses" class="text-text hover:text-primary transition font-medium">Courses</a>
+        <a href="/about" class="text-text hover:text-primary transition font-medium">About</a>
+        <a href="/contact" class="text-text hover:text-primary transition font-medium">Contact</a>
+      </div>
+
+      <!-- Mobile Toggle Button -->
+      <div class="md:hidden flex items-center">
+        <button id="menu-btn" class="text-primary focus:outline-none text-xl">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white rounded-lg shadow-md py-2 px-4 space-y-2">
+      <a href="/" class="block text-text hover:text-primary font-medium">Home</a>
+      <a href="/colleges" class="block text-text hover:text-primary font-medium">Colleges</a>
+      <a href="/courses" class="block text-text hover:text-primary font-medium">Courses</a>
+      <a href="/about" class="block text-text hover:text-primary font-medium">About</a>
+      <a href="/contact" class="block text-text hover:text-primary font-medium">Contact</a>
+    </div>
+  </div>
+</nav>
+
+  <div class="container-fluid mt-24 mb-10">
+    <div class="row flex-container">
+      <!-- Left Section -->
+      <div class="left-col prose">
+        <% if (information) { %>
+          <article>
+            <header>
+              <h1><i class="fas fa-university"></i> <%= information.clg_name %></h1>
+            </header>
+
+            <% if (information.clg_heading) { %>
+              <p class="fst-italic text-muted"><%= information.clg_heading %></p>
+              <hr class="section-divider" />
+            <% } %>
+
+            <% if (information.clg_info1 || information.clg_info2 || information.clg_info3) { %>
+            <section>
+              <h2><i class="fas fa-info-circle"></i> About the Institution</h2>
+              <% if (information.clg_info1) { %><p><%= information.clg_info1 %></p><% } %>
+              <% if (information.clg_info2) { %><p><%= information.clg_info2 %></p><% } %>
+              <% if (information.clg_info3) { %><p><%= information.clg_info3 %></p><% } %>
+            </section>
+            <hr class="section-divider" />
+            <% } %>
+
+            <% if (information.clg_courses?.length) { %>
+            <section>
+              <h2><i class="fas fa-book"></i> Courses Offered</h2>
+              <ul>
+                <% information.clg_courses.forEach(course => { %>
+                  <li><strong><%= course.courses %></strong> — <small><%= course.syllabus %></small></li>
+                <% }) %>
+              </ul>
+            </section>
+            <hr class="section-divider" />
+            <% } %>
+
+            <% if (information.clg_departments?.length) { %>
+            <section>
+              <h2><i class="fas fa-building"></i> Departments</h2>
+              <div>
+                <% information.clg_departments.forEach(dept => { %>
+                  <span class="badge"><%= dept %></span>
+                <% }) %>
+              </div>
+            </section>
+            <hr class="section-divider" />
+            <% } %>
+
+            <% if (information.clg_acmts_img_paths?.length) { %>
+            <section>
+              <h2><i class="fas fa-bed"></i> Accommodation Gallery</h2>
+              <div class="d-flex flex-wrap gap-2 gal-img">
+                <% information.clg_acmts_img_paths.forEach(path => { %>
+                  <img src="<%= path %>" alt="Accommodation" loading="lazy" />
+                <% }) %>
+              </div>
+            </section>
+            <% } %>
+          </article>
+        <% } %>
+      </div>
+
+      <!-- Right Section -->
+      <div class="right-col prose">
+        <% if (information.clg_images_paths?.length) { %>
+        <section class="mb-4">
+          <h2 class="text-xl font-semibold mb-2">Campus Gallery</h2>
+          <div id="custom-swiper" class="custom-swiper rounded-lg overflow-hidden shadow relative bg-white">
+            <div class="slides-container relative">
+              <% information.clg_images_paths.forEach((path, idx) => { %>
+              <img
+                src="<%= path %>"
+                alt="Campus Image <%= idx + 1 %>"
+                class="slide"
+                loading="lazy"
+              />
+              <% }) %>
+            </div>
+
+            <!-- Navigation -->
+            <button id="prevBtn" aria-label="Previous" class="nav-btn prev-btn">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="nextBtn" aria-label="Next" class="nav-btn next-btn">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Pagination dots -->
+            <div id="pagination" class="pagination"></div>
+          </div>
+        </section>
+        <% } %>
+
+        <% if (information.clg_address_url) { %>
+        <section>
+          <h2><i class="fas fa-map-marker-alt"></i> Campus Location</h2>
+          <iframe
+            src="<%= information.clg_address_url %>"
+            width="100%"
+            height="250"
+            style="border:1px solid #e5e7eb; border-radius: 0.3rem;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+          <hr class="section-divider" />
+        </section>
+        <% } %>
+
+        <% if (information.clg_since) { %>
+        <section>
+          <h2><i class="fas fa-calendar-alt"></i> Established</h2>
+          <p><strong><%= information.clg_since %></strong></p>
+          <hr class="section-divider" />
+        </section>
+        <% } %>
+
+        <% if (information.clg_acmts?.length) { %>
+        <section>
+          <h2><i class="fas fa-home"></i> Accommodations</h2>
+          <ul>
+            <% information.clg_acmts.forEach(acmt => { %>
+            <li><%= acmt %></li>
+            <% }) %>
+          </ul>
+          <hr class="section-divider" />
+        </section>
+        <% } %>
+
+        <% if (information.clg_rating) { %>
+        <section>
+          <h2><i class="fas fa-star"></i> Rating</h2>
+          <p><strong><%= information.clg_rating %> / 5</strong></p>
+          <hr class="section-divider" />
+        </section>
+        <% } %>
+
+        <% if (information.clg_contact || information.clg_email) { %>
+        <section class="contact-info">
+          <h2><i class="fas fa-phone"></i> Contact Information</h2>
+          <p><i class="fas fa-phone-alt"></i> <%= information.clg_contact || 'N/A' %></p>
+          <% if (information.clg_email) { %>
+          <p><i class="fas fa-envelope"></i> <a href="mailto:<%= information.clg_email %>"><%= information.clg_email %></a></p>
+          <% } %>
+          <hr class="section-divider" />
+        </section>
+        <% } %>
+
+        <% if (information.clg_address) { %>
+        <section class="address">
+          <h2><i class="fas fa-map"></i> Address</h2>
+          <p>
+            <%= information.clg_address.address %>, <%= information.clg_address.city %>, 
+            <%= information.clg_address.state %>, <%= information.clg_address.country %> - 
+            <%= information.clg_address.pincode %>
+          </p>
+          <% if (information.clg_address_url) { %>
+          <a href="<%= information.clg_address_url %>" target="_blank" rel="noopener noreferrer"
+             >📍 View on Map</a>
+          <% } %>
+        </section>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('#custom-swiper .slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const pagination = document.getElementById('pagination');
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      let autoPlayInterval;
+
+      // Initialize pagination dots
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (index === 0) dot.classList.add('active');
+        dot.dataset.index = index;
+        pagination.appendChild(dot);
+      });
+
+      const dots = pagination.querySelectorAll('.dot');
+
+      function showSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+
+        currentIndex = index;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        showSlide(currentIndex - 1);
+        resetAutoplay();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        showSlide(currentIndex + 1);
+        resetAutoplay();
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          showSlide(parseInt(e.target.dataset.index));
+          resetAutoplay();
+        });
+      });
+
+      function startAutoplay() {
+        autoPlayInterval = setInterval(() => {
+          showSlide(currentIndex + 1);
+        }, 4000);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoPlayInterval);
+        startAutoplay();
+      }
+
+      // Initialize
+      if (totalSlides > 0) {
+        showSlide(0);
+        startAutoplay();
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          showSlide(currentIndex - 1);
+          resetAutoplay();
+        } else if (e.key === 'ArrowRight') {
+          showSlide(currentIndex + 1);
+          resetAutoplay();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
